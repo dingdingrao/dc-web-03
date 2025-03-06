@@ -1,0 +1,1593 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <title>Virtual Try-On | DC</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.svg">
+
+  <!-- All CSS Links -->
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dialog.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src=" https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+
+<body x-data="{scrollTop : false}">
+  <!-- Preloader -->
+  <section class="hidden preloader-area text-center left-0 right-0 top-0 bottom-0 bg-white fixed z-9999">
+    <div class="preloader absolute -mt-5 left-0 right-0 top-1/2 m-auto -translate-y-2/4">
+      <div class="waviy font-bold text-[50px]">
+        <span class="text-black inline-block relative">L</span>
+        <span class="text-primary-color inline-block relative">O</span>
+        <span class="text-black inline-block relative">G</span>
+        <span class="text-primary-color inline-block relative">O</span>
+      </div>
+    </div>
+  </section>
+  <!-- End Preloader -->
+
+  <!-- Navbar Area -->
+  <section x-data="{ stickyMenu: false, navigationOpen: false }"
+    @scroll.window="stickyMenu = (window.scrollY > 0) ? true : false"
+    class="navbar-area fixed z-100 top-0 w-full shadow-navbar z-2 backdrop-blur-md bg-[#ffffff61]"
+    :class="{ 'is-sticky text-white dc-bg-black': stickyMenu }">
+    <!-- H5 -->
+    <div class="dc-responsive-nav lg:hidden">
+      <div class="container">
+        <nav class="navbar w-full h-[60px] flex justify-between items-center">
+          <div class="flex gap-3">
+            <!-- Hamburger Toggle BTN -->
+            <button class="lg:hidden block shrink-0" @click="navigationOpen = !navigationOpen">
+              <span class="block relative cursor-pointer w-5.5 h-5.5">
+                <span class="du-block absolute right-0 w-full h-full">
+                  <span
+                    class="block relative top-0 left-0 dc-bg-yellow rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-[0]"
+                    :class="{ '!w-full delay-300': !navigationOpen }"></span>
+                  <span
+                    class="block relative top-0 left-0 dc-bg-yellow rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-150"
+                    :class="{ '!w-full delay-400': !navigationOpen }"></span>
+                  <span
+                    class="block relative top-0 left-0 dc-bg-yellow rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-200"
+                    :class="{ '!w-full delay-500': !navigationOpen }"></span>
+                </span>
+                <span class="du-block absolute right-0 w-full h-full rotate-45">
+                  <span
+                    class="block dc-bg-yellow unded-sm ease-in-out duration-200 delay-300 absolute left-2.5 top-0 w-0.5 h-full"
+                    :class="{ '!h-0 delay-[0]': !navigationOpen }"></span>
+                  <span
+                    class="block dc-bg-yellow rounded-sm ease-in-out duration-200 delay-400 absolute left-0 top-2.5 w-full h-0.5"
+                    :class="{ '!h-0 dealy-200': !navigationOpen }"></span>
+                </span>
+              </span>
+            </button>
+            <!-- Hamburger Toggle BTN -->
+
+            <a class="navbar-brand shrink-0 text-xl font-bold" href="/">
+              LOGO
+              <!-- <img class="w-[60%]" src="assets/img/logo.png" alt="logo"> -->
+            </a>
+          </div>
+
+          <div class="flex gap-10 text-white">
+            <ul x-show="navigationOpen" x-transition:enter="animate__fadeInDown" x-transition:leave="animate__fadeOut"
+              class="absolute top-[60px] left-0 w-full dc-bg-black self-center flex flex-col justify-between p-10 animate__animated animate__faster">
+              <li class="border-b border-gray-700">
+                <a href="/"
+                  class="block font-semibold text-[16px] ease-in duration-300 hover:text-primary-color py-8">Home</a>
+              </li>
+              <li class="border-b border-gray-700">
+                <a href="./api.html"
+                  class="block font-semibold text-[16px] ease-in duration-300 hover:text-primary-color py-8">API</a>
+              </li>
+              <li>
+                <a href="./demo.html"
+                  class="block font-semibold text-[16px] ease-in duration-300 hover:text-primary-color py-8">Demo</a>
+              </li>
+            </ul>
+
+            <div class="self-center">
+              <a href="#sign-dialog"
+                class="signIn dc-button inline-block font-semibold text-[13px] rounded-full dc-text-yellow dc-bg-black py-2 px-5 shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300"
+                :class="{ '!text-black dc-bg-yellow': stickyMenu }">
+                Sign In
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- PC -->
+    <div class="dc-nav hidden lg:block">
+      <div class="container xl:max-w-full 3xl:max-w-[1700px]">
+        <nav class="navbar flex gap-20 justify-between items-center">
+          <a class="navbar-brand shrink-0 w-[150px] text-4xl font-bold" href="/">
+            LOGO
+            <!-- <img class="w-100" src="assets/img/logo.png" alt="logo"> -->
+          </a>
+
+          <div class="flex gap-20">
+            <ul class="self-center flex gap-10">
+              <li>
+                <a href="#"
+                  class="block font-semibold text-[16px] ease-in duration-300 hover:text-[#d4f73f] py-6">Home</a>
+              </li>
+              <li>
+                <a href="./api.html"
+                  class="block font-semibold text-[16px] ease-in duration-300 hover:text-[#d4f73f] py-6">API</a>
+              </li>
+              <li>
+                <a href="./demo.html"
+                  class="block font-semibold text-[16px] ease-in duration-300 hover:text-[#d4f73f] py-6">Demo</a>
+              </li>
+            </ul>
+
+            <div class="self-center">
+              <!-- <a href="signin.html"
+                class="inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] rounded-full !text-black py-4 px-15 dc-text-yellow dc-bg-yellow shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">
+                Sign In
+              </a> -->
+              <a href="#sign-dialog"
+                class="signIn dc-button inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] rounded-full dc-text-yellow dc-bg-black py-3.5 px-12 shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300"
+                :class="{ '!text-black dc-bg-yellow': stickyMenu }">
+                Sign In
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </section>
+  <!-- End Navbar Area -->
+
+  <!-- Banner Area -->
+  <section class="banner-area pt-20 md:pt-30 relative z-1" style="background: url(assets/img/shape/bg9.png) no-repeat;">
+    <div class="container">
+      <div class="banner-content text-center ml-auto mr-auto max-w-[1010px]">
+        <div
+          class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mt-5 mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+          <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">Discover Why We’re the Best
+            →</div>
+        </div>
+        <h1
+          class="font-black text-black text-[35px] md:text-[40px] lg:text-[50px] xl:text-[60px] leading-[1.3] mt-5 mb-3 md:mb-5 lg:mb-20 tracking-tighter">
+          The Ultimate Virtual Try-On Solution – <b
+            class="inline-block px-8 text-white bg-[#aedb01] rounded-xl [clip-path:polygon(5%_0%,100%_0%,95%_95%,0%_100%)] wow animate__animated animate__bounceIn">Model
+            &
+            API</b>
+          for
+          Seamless
+          Integration</h1>
+        <p
+          class="text-optional-color text-[14px] md:text-[15px] lg:text-[16px] lg:ml-auto lg:mr-auto lg:max-w-[790px] md:leading-8 leading-7">
+          Setting the benchmark for virtual fashion innovation – trusted by leading brands worldwide.</p>
+        <a href="/"
+          class="dc-button inline-block mx-auto mt-5 md:mt-8 lg:mt-50 font-semibold text-[13px] md:text-[14px] lg:text-[15px] rounded-full py-3 md:py-5 px-10 md:px-15 dc-text-yellow dc-bg-black shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">
+          Get API Access</a>
+        <span class="block text-[#A4A4A4] mt-5 md:mt-8 lg:mt-30 text-[13px] md:text-[14px]">
+          Avail 30 Days Free Trial
+        </span>
+      </div>
+
+      <!-- Hero -->
+      <div
+        class="banner-image relative w-full xl:max-w-[1094px] aspect-5/3 mt-20 md:mt-20 lg:mt-60 mx-auto bg-gray-300/10 text-gray-500 rounded-4xl border-6 p-2 border-[#d4f73f]">
+        <img src="./assets/img/ai/belgium-boy.webp" alt="banner-image"
+          class="w-full aspect-5/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp"
+          data-wow-delay=".1s">
+      </div>
+    </div>
+
+    <!-- 特效 -->
+    <div class="absolute -z-1 left-0 top-[34%]">
+      <img src="assets/img/shape/shape16.png" alt="shape" class="animate-custom-movebounce">
+    </div>
+    <div class="absolute -z-1 right-[0] top-[14%]">
+      <img src="assets/img/shape/shape18.png" alt="shape" class="animate-custom-movebounce">
+    </div>
+  </section>
+  <!-- End Banner Area -->
+
+  <!-- About Area -->
+  <section class="about-area pt-30 relative z-1 bg-[#fbfbfb] bg-cover bg-no-repeat bg-bottom"
+    style="background-image: url(assets/img/shape/bg4.jpg);">
+    <div class="container">
+      <div class="section-title mb-10 md:mb-15 lg:mb-20 text-center">
+        <div
+          class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+          <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">Product’s Feature</div>
+        </div>
+        <h2 class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[40px] mb-2 text-black">Innovative
+          Features for a Next-Gen Virtual Try-On Experience</h2>
+        <p class="lg:text-[16px] md:text-[15px] text-[13px] lg:max-w-2xl lg:mx-auto leading-7 md:leading-8">
+          Our virtual try-on solution combines precision, speed, and flexibility to deliver unmatched results. See how
+          our features can transform your platform and elevate user experiences.</p>
+      </div>
+
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[450px_1fr] xl:grid-cols-[600px_1fr] 2xl:grid-cols-[630px_auto] gap-[20px] lg:gap-[30px] mt-0 xl:mt-[140px] 2xl:mt-[140px]">
+
+        <div class="section-title mb-10 md:mb-20 lg:mb-50 flex flex-col justify-center">
+          <h2 class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[40px] mb-2 text-black">
+            Support for All File Types
+          </h2>
+          <p class="lg:text-[16px] md:text-[15px] text-[13px] lg:max-w-2xl lg:mx-auto leading-7 md:leading-8">
+            No matter the format, our virtual try-on solution supports it all. Images, videos, and GIFs are processed
+            with precision, delivering a seamless and engaging experience for your users.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-2 gap-[20px] md:gap-x-[30px] justify-between relative wow animate__animated animate__fadeInUp">
+          <!-- <div
+            class="p-[16px] md:p-[25px] xl:pt-[37px] xl:pb-[33px] xl:px-[35px] 2xl:py-[52px] 2xl:px-[45px] rounded-3xl has_fade_anim"
+            style="background-color: rgb(237, 238, 255); translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"> -->
+          <div
+            class="p-[16px] md:p-[25px] xl:pt-[37px] xl:pb-[33px] xl:px-[35px] 2xl:py-[52px] 2xl:px-[45px] rounded-3xl has_fade_anim dc-bg-yellow">
+            <h3 class="text-[25px] md:text-[40px] 2xl:text-[60px] uppercase dc-text-black">
+              <span>Photo</span>
+              <!-- <span
+                class="text-[20px] md:text-[40px] -start-[4px] xl:-start-[15px] -top-[8px] md:-top-[15px] relative inline-block bold">+</span> -->
+            </h3>
+            <p class="text-[13px] md:text-[16px] mt-[15px]">JPG / PNG / WebP
+            </p>
+          </div>
+          <div
+            class="p-[16px] md:p-[25px] xl:pt-[37px] xl:pb-[33px] xl:px-[35px] 2xl:py-[52px] 2xl:px-[45px] rounded-3xl has_fade_anim dc-bg-black">
+            <h3 class="text-[25px] md:text-[40px] 2xl:text-[60px] uppercase dc-text-yellow">
+              <span>Video</span>
+              <!-- <span
+                class="text-[20px] md:text-[40px] -start-[4px] xl:-start-[15px] -top-[8px] md:-top-[15px] relative inline-block bold">+</span> -->
+            </h3>
+            <p class="text-[13px] md:text-[16px] mt-[15px] text-gray-300">MP4 / MOV / M4V
+            </p>
+          </div>
+          <div
+            class="p-[16px] md:p-[25px] xl:pt-[37px] xl:pb-[33px] xl:px-[35px] 2xl:py-[52px] 2xl:px-[45px] rounded-3xl has_fade_anim dc-bg-black">
+            <h3 class="text-[25px] md:text-[40px] 2xl:text-[60px] uppercase dc-text-yellow">
+              <span>GIF</span>
+              <!-- <span
+                class="text-[20px] md:text-[40px] -start-[4px] xl:-start-[15px] -top-[8px] md:-top-[15px] relative inline-block bold">+</span> -->
+            </h3>
+            <p class="text-[13px] md:text-[16px] mt-[15px] text-gray-300">GIF / WebP
+              apps.</p>
+          </div>
+          <div
+            class="p-[16px] md:p-[25px] xl:pt-[37px] xl:pb-[33px] xl:px-[35px] 2xl:py-[52px] 2xl:px-[45px] rounded-3xl has_fade_anim dc-bg-yellow">
+            <h3 class="text-[25px] md:text-[40px] 2xl:text-[60px] uppercase dc-text-black">
+              <span>Other</span>
+              <!-- <span
+                class="text-[20px] md:text-[40px] -start-[4px] xl:-start-[15px] -top-[8px] md:-top-[15px] relative inline-block bold">+</span> -->
+            </h3>
+            <p class="text-[13px] md:text-[16px] mt-[15px]">Comming soon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End About Area -->
+
+  <!-- Overview Area 1 -->
+  <section class="overview-area pt-30 md:pt-30 relative z-1" style="background-image: url(assets/img/shape/bg5.png);">
+    <div class="container">
+      <div
+        class="grid gap-10 md:gap-10 lg:gap-30 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+        <div
+          class="overview-image md:pt-30 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg before:w-377 md:before:h-388 lg:before:h-[330px] xl:before:h-388 before:absolute before:left-0 before:top-0 before:hidden before:-z-1 md:before:inline md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
+          <img src="./assets/img/ai/france-boy.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
+            data-wow-delay=".1s" alt="overview-image">
+        </div>
+        <div class="overview-content self-center xl:pl-100 lg:pl-30 relative xl:top-30 max-sm:text-center">
+          <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
+            Preview Before You Commit</h2>
+          <p class="text-[13px] md:text-[15px] lg:text-[16px] leading-7 md:leading-8">dc Planning,
+            Choose any frame from your video to preview the virtual try-on effect, ensuring perfect results before
+            applying changes to the entire clip.</p>
+          <a href="/"
+            class="dc-button-black inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] mt-5 md:mt-6 rounded-full py-5 px-15 leading-[1em] dc-bg-yellow shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">View
+            Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Overview Area -->
+
+  <!-- Overview Area 2 -->
+  <section class="overview-area pt-10 md:pt-30 relative z-1">
+    <div class="container">
+      <div
+        class="grid gap-10 md:gap-10 lg:gap-30 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+        <div
+          class="overview-content self-center lg:pr-30 xl:pr-100 order-2 lg:order-1 relative xl:top-30 max-sm:text-center">
+          <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
+            Multi-Person Customization</h2>
+          <p class="text-[13px] md:text-[15px] lg:text-[16px] leading-7 md:leading-8">
+            When multiple people are in the frame, our virtual try-on model lets you individually customize each
+            person’s outfit—perfect for images, videos, and GIFs.</p>
+          <a href="/"
+            class="dc-button-black inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] mt-15 md:mt-6 rounded-full py-5 px-15 leading-[1em] dc-bg-yellow shadow-custom-box-shadow hover:shadow-primary-btn ease-in duration-300">View
+            Details</a>
+        </div>
+        <div
+          class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg3 before:w-377 md:before:h-388 lg:before:h-[329px] xl:before:h-388 before:absolute before:right-0 before:top-0 before:-z-1 before:hidden md:before:inline order-1 lg:order-2 md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
+          <img src="./assets/img/ai/luxembourg-boy.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
+            data-wow-delay=".1s" alt="overview-image">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Overview Area -->
+
+  <!-- Overview Area 3 -->
+  <section class="overview-area pt-10 md:pt-30 relative z-1">
+    <div class="container xl:pb-30">
+      <div class="grid gap-10 md:gap-30  grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+        <div
+          class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg4 before:w-377 md:before:h-388 lg:before:h-[330px] xl:before:h-388 before:absolute before:left-0 before:top-0 before:hidden before:-z-1 md:before:inline md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
+          <img src="./assets/img/ai/monaco-girl.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
+            data-wow-delay=".1s" alt="overview-image">
+        </div>
+        <div class="overview-content self-center xl:pl-100 lg:pl-30 relative xl:top-30 max-sm:text-center">
+          <!-- <span class="block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-3 md:mb-5">Our
+            Products_03</span> -->
+          <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
+            One Outfit, Everyone</h2>
+          <p class="text-[13px] md:text-[15px] lg:text-[16px] leading-7 md:leading-8">dc Planning,
+            When multiple people are in the frame, our virtual try-on model lets you apply the same outfit to
+            everyone—perfect for creating cohesive looks in images, videos, and GIFs.</p>
+          <a href="/"
+            class="dc-button-black inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] mt-15 md:mt-6 rounded-full py-5 px-15 leading-[1em]  dc-bg-yellow shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">View
+            Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Overview Area -->
+
+  <!-- Overview Area 4 -->
+  <section class="overview-area pt-10 md:pt-30 relative z-1">
+    <div class="container">
+      <div class="grid gap-10 md:gap-30  grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+        <div
+          class="overview-content self-center lg:pr-30 xl:pr-100 order-2 lg:order-1 relative xl:top-30 max-sm:text-center">
+          <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
+            Visual Boost
+          </h2>
+          <p class="text-[13px] md:text-[15px] lg:text-[16px] leading-7 md:leading-8">
+            Transform your visuals with smart enhancement.</p>
+          <a href="/"
+            class="dc-button-black inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] mt-15 md:mt-6 rounded-full py-5 px-15 leading-[1em]  dc-bg-yellow shadow-custom-box-shadow hover:shadow-primary-btn ease-in duration-300">View
+            Details</a>
+        </div>
+        <div
+          class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg3 before:w-377 md:before:h-388 lg:before:h-[329px] xl:before:h-388 before:absolute before:right-0 before:top-0 before:-z-1 before:hidden md:before:inline order-1 lg:order-2 md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
+          <img src="./assets/img/ai/netherlands-girl.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
+            data-wow-delay=".1s" alt="overview-image">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Overview Area -->
+
+  <!-- Overview Area 5 -->
+  <section class="overview-area py-10 md:pt-30 relative z-1">
+    <div class="container xl:pb-30">
+      <div class="grid gap-10 md:gap-30  grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+        <div
+          class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg4 before:w-377 md:before:h-388 lg:before:h-[330px] xl:before:h-388 before:absolute before:left-0 before:top-0 before:hidden before:-z-1 md:before:inline md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
+          <img src="./assets/img/ai/netherlands-boy.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
+            data-wow-delay=".1s" alt="overview-image">
+        </div>
+        <div class="overview-content self-center xl:pl-100 lg:pl-30 relative xl:top-30 max-sm:text-center">
+          <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
+            Customizable Watermarks
+          </h2>
+          <p class="text-[13px] md:text-[15px] lg:text-[16px] leading-7 md:leading-8">
+            Choose whether to add watermarks, and fully customize their content and placement to align with your brand
+            or personal style.</p>
+          <a href="/"
+            class="dc-button-black inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] mt-15 md:mt-6 rounded-full py-5 px-15 leading-[1em]  dc-bg-yellow shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">View
+            Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Overview Area -->
+
+  <!-- Code Area -->
+  <section class="Code-area py-30 relative bg-[#EDF4F3]/50">
+    <div class="container">
+      <!-- Section Title -->
+      <div class="section-title mb-10 md:mb-20 lg:mb-50 text-center wow animate__animated animate__fadeInUp">
+        <div
+          class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+          <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">Our Powerful API</div>
+        </div>
+        <h2 class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[40px] mb-2 text-black">
+          Ready to Integrate? Explore Our Powerful API
+        </h2>
+        <p class="lg:text-[16px] md:text-[15px] text-[13px] lg:max-w-2xl lg:mx-auto leading-7 md:leading-8">
+          Our API is designed to make virtual try-on seamless and efficient for your platform.
+        </p>
+      </div>
+
+      <div class="grid gap-9 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+        <div class="integrate-apps-content self-center lg:pr-75 xl:pr-100 wow animate__animated animate__fadeInUp"
+          data-wow-delay=".1s">
+          <h3 class="mb-10 font-bold text-[16px] md:text-[16px] lg:text-[20px] lg:max-w-[435px] leading-7 md:leading-8">
+            Here’s why developers love it:
+          </h3>
+          <ul>
+            <li class="flex gap-4">
+              <div class="flex items-center justify-center shrink-0 text-xl dc-bg-yellow w-10 h-10 rounded-full">+
+              </div>
+              <p class="text-[14px] md:text-[16px] lg:text-[18px] lg:max-w-[435px] mb-8 leading-7 md:leading-8">
+                Easy Integration: Get started quickly with comprehensive documentation and developer-friendly SDKs.
+              </p>
+            </li>
+            <li class="flex gap-4">
+              <div class="flex items-center justify-center shrink-0 text-xl dc-bg-yellow w-10 h-10 rounded-full">+</div>
+              <p class="text-[14px] md:text-[16px] lg:text-[18px] lg:max-w-[435px] mb-8 leading-7 md:leading-8">
+                Scalable Performance: Handle high traffic and complex tasks with a robust, cloud-based infrastructure.
+              </p>
+            </li>
+            <li class="flex gap-4">
+              <div class="flex items-center justify-center shrink-0 text-xl dc-bg-yellow w-10 h-10 rounded-full">+</div>
+              <p class="text-[14px] md:text-[16px] lg:text-[18px] lg:max-w-[435px] mb-8 leading-7 md:leading-8">
+                Customizable Features: Tailor the virtual try-on experience to your exact needs with flexible options.
+              </p>
+            </li>
+          </ul>
+
+          <div class="max-sm:text-center max-sm:mb-10">
+            <a href="/"
+              class="dc-button inline-block font-semibold text-[13px] md:text-[14px] lg:text-[15px] mt-5 rounded-full py-5 px-15 leading-[1em] dc-text-yellow dc-bg-black shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">
+              View API</a>
+          </div>
+        </div>
+
+        <div class="integrate-apps-list lg:-ml-75 xl:-ml-100 wow animate__animated animate__fadeInUp"
+          data-wow-delay=".3s">
+          <!-- Featured Card -->
+          <div class="relative min-h-[30rem] w-full h-[500px] overflow-hidden rounded-3xl bg-gray-900 shadow-2xl"
+            x-data="{tab: 1}">
+            <div class="flex bg-gray-800/40 ring-1 ring-white/5">
+              <div class="-mb-px flex text-sm/6 font-medium text-gray-400">
+                <div class="border-r border-b border-r-white/10 border-b-white/20 px-4 py-2 cursor-pointer"
+                  :class="{ 'text-white bg-white/5': tab === 1 }" @click="tab = 1">
+                  NotificationSetting.jsx</div>
+                <div class="border-r border-gray-600/10 px-4 py-2 cursor-pointer"
+                  :class="{ 'text-white bg-white/5': tab === 2 }" @click="tab = 2">App.jsx</div>
+              </div>
+            </div>
+            <div class="px-6 pt-6 pb-14">
+              <!-- Tab Content 1 -->
+              <div class="tab-content-1 hidden" :class="{ '!block': tab === 1 }">
+                <x-placeholder message="Your code example">
+                  <pre class="text-[0.8125rem]/6 text-gray-300" style="tab-size: 2">
+<code>
+  import { <span class="text-[#7dd3fc]">useState</span> } from <span class="text-emerald-300">'react'</span>
+  import { <span class="text-[#7dd3fc]">Switch</span> } from <span class="text-emerald-300">'@headlessui/react'</span>
+
+  <span class="text-indigo-400">function Example</span>() {
+    const [<span class="text-[#7dd3fc]">enabled</span>, <span class="text-[#7dd3fc]">setEnabled</span>] = useState(<span class="text-[#7dd3fc]">true</span>)
+
+    return (
+      &lt;<span class="text-indigo-400">form</span> action="/<span class="text-emerald-300">notification-settings</span>" method="<span class="text-emerald-300">post</span>"&gt;
+        &lt;<span class="text-indigo-400">Switch</span> checked={<span class="text-[#7dd3fc]">enabled</span>} onChange={<span class="text-[#7dd3fc]">setEnabled</span>} name="<span class="text-emerald-300">notifications</span>"&gt;
+          {<span class="text-gray-500">/* ... */</span>}
+        &lt;/<span class="text-indigo-400">Switch</span>&gt;
+        &lt;<span class="text-indigo-400">button</span>&gt;Submit&lt;/<span class="text-indigo-400">button</span>&gt;
+      &lt;/<span class="text-indigo-400">form</span>&gt;
+    )
+  }
+</code>
+                  </pre>
+                </x-placeholder>
+              </div>
+
+              <!-- Tab Content 2 -->
+              <div class="tab-content-2 hidden" :class="{ '!block': tab === 2 }">
+                <x-placeholder message="Your code example">
+                  <pre class="text-[0.8125rem]/6 text-gray-300" style="tab-size: 2">
+<code>
+  import { <span class="text-[#7dd3fc]">useState</span> } from <span class="text-emerald-300">'react'</span>
+  import { <span class="text-[#7dd3fc]">Switch</span> } from <span class="text-emerald-300">'@headlessui/react'</span>
+
+  <span class="text-indigo-400">function Example</span>() {
+    const [<span class="text-[#7dd3fc]">enabled</span>, <span class="text-[#7dd3fc]">setEnabled</span>] = useState(<span class="text-[#7dd3fc]">true</span>)
+
+    return (
+      &lt;<span class="text-indigo-400">form</span> action="/<span class="text-emerald-300">notification-settings</span>" method="<span class="text-emerald-300">post</span>"&gt;
+        &lt;<span class="text-indigo-400">Switch</span> checked={<span class="text-[#7dd3fc]">enabled</span>} onChange={<span class="text-[#7dd3fc]">setEnabled</span>} name="<span class="text-emerald-300">notifications</span>"&gt;
+          {<span class="text-gray-500">/*
+             ... 
+          */</span>}
+        &lt;/<span class="text-indigo-400">Switch</span>&gt;
+        &lt;<span class="text-indigo-400">button</span>&gt;Submit&lt;/<span class="text-indigo-400">button</span>&gt;
+      &lt;/<span class="text-indigo-400">form</span>&gt;
+    )
+  }
+</code>
+                  </pre>
+                </x-placeholder>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Advanced Area -->
+
+  <!-- ===== Why Area ===== -->
+  <section class="overflow-hidden pt-17.5 lg:pt-22.5 xl:pt-27.5 scroll-mt-17">
+    <div class="container">
+      <!-- Section Title -->
+      <div class="section-title mb-10 md:mb-20 lg:mb-50 text-center wow animate__animated animate__fadeInUp">
+        <div
+          class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+          <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">Advantages</div>
+        </div>
+        <h2 class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[40px] mb-2 text-black">
+          Why We Stand Out – The Advantages of Choosing Us
+        </h2>
+        <p class="lg:text-[16px] md:text-[15px] text-[13px] lg:max-w-2xl lg:mx-auto leading-7 md:leading-8">
+          From cutting-edge technology to unparalleled flexibility, our virtual try-on model and API are designed to
+          deliver exceptional results for developers and brands alike.
+        </p>
+      </div>
+
+      <div class="relative border-1 border-dashed border-[#a3a3a3] rounded-3xl">
+        <div
+          class="features-row-border rotate-90 w-1/2 h-[1px] absolute top-1/2 left-1/2 -translate-y-1/2 lg:-translate-x-1/3 lg:left-1/4 hidden lg:block">
+        </div>
+        <div
+          class="features-row-border rotate-90 w-1/2 h-[1px] absolute top-1/2 right-1/2 -translate-y-1/2 lg:right-[8.3%] hidden lg:block">
+        </div>
+
+        <!--=== Features Row ===-->
+        <div class="flex flex-wrap justify-center">
+          <!-- Features Item -->
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-10 max-sm:p-5 sm:p-5 md:p-7 lg:p-6 xl:p-10">
+            <div
+              class="group relative overflow-hidden text-center h-full bg-[#efefef] hover:bg-[#d4f73f] rounded-3xl transition-all hover:transition-discrete">
+              <div class="dc-bg-black p-10">
+                <span
+                  class="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
+                <span
+                  class="relative w-20 h-20 rounded-full inline-flex items-center justify-center text-3xl font-bold dc-bg-yellow">
+                  01
+                </span>
+              </div>
+              <div class="p-10">
+                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                  AI Image Generation
+                </h4>
+                <p class="font-medium text-gray-500">
+                  Effortlessly generate high-quality images with AI to enhance your
+                  designs and creative projects.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Item -->
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-10 max-sm:p-5 sm:p-5 md:p-7 lg:p-6 xl:p-10">
+            <div
+              class="group relative overflow-hidden text-center h-full bg-[#efefef] hover:bg-[#d4f73f] rounded-3xl transition-all hover:transition-discrete">
+              <div class="dc-bg-black p-10">
+                <span
+                  class="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
+                <span
+                  class="relative w-20 h-20 rounded-full inline-flex items-center justify-center text-3xl font-bold dc-bg-yellow">
+                  02
+                </span>
+              </div>
+              <div class="p-10">
+                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                  High-Resolution Output
+                </h4>
+                <p class="font-medium text-gray-500">
+                  Produce clear and detailed images that capture every nuance.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Item -->
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-10 max-sm:p-5 sm:p-5 md:p-7 lg:p-6 xl:p-10">
+            <div
+              class="group relative overflow-hidden text-center h-full bg-[#efefef] hover:bg-[#d4f73f] rounded-3xl transition-all hover:transition-discrete">
+              <div class="dc-bg-black p-10">
+                <span
+                  class="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
+                <span
+                  class="relative w-20 h-20 rounded-full inline-flex items-center justify-center text-3xl font-bold dc-bg-yellow">
+                  03
+                </span>
+              </div>
+              <div class="p-10">
+                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                  Diverse Styles
+                </h4>
+                <p class="font-medium text-gray-500">
+                  From realistic to artistic, explore various styles to match your vision.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Item -->
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-10 max-sm:p-5 sm:p-5 md:p-7 lg:p-6 xl:p-10">
+            <div
+              class="group relative overflow-hidden text-center h-full bg-[#efefef] hover:bg-[#d4f73f] rounded-3xl transition-all hover:transition-discrete">
+              <div class="dc-bg-black p-10">
+                <span
+                  class="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
+                <span
+                  class="relative w-20 h-20 rounded-full inline-flex items-center justify-center text-3xl font-bold dc-bg-yellow">
+                  04
+                </span>
+              </div>
+              <div class="p-10">
+                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                  Smart Image Enhancement
+                </h4>
+                <p class="font-medium text-gray-500">
+                  Refine quality, adjust details, and achieve a professional look effortlessly.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Item -->
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-10 max-sm:p-5 sm:p-5 md:p-7 lg:p-6 xl:p-10">
+            <div
+              class="group relative overflow-hidden text-center h-full bg-[#efefef] hover:bg-[#d4f73f] rounded-3xl transition-all hover:transition-discrete">
+              <div class="dc-bg-black p-10">
+                <span
+                  class="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
+                <span
+                  class="relative w-20 h-20 rounded-full inline-flex items-center justify-center text-3xl font-bold dc-bg-yellow">
+                  05
+                </span>
+              </div>
+              <div class="p-10">
+                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                  Text-to-Image Transformation
+                </h4>
+                <p class="font-medium text-gray-500">
+                  Turn your ideas into stunning visuals with AI-powered text-to-image generation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Item -->
+          <div class="w-full sm:w-1/2 lg:w-1/3 p-10 max-sm:p-5 sm:p-5 md:p-7 lg:p-6 xl:p-10">
+            <div
+              class="group relative overflow-hidden text-center h-full bg-[#efefef] hover:bg-[#d4f73f] rounded-3xl transition-all hover:transition-discrete">
+              <div class="dc-bg-black p-10">
+                <span
+                  class="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
+                <span
+                  class="relative w-20 h-20 rounded-full inline-flex items-center justify-center text-3xl font-bold dc-bg-yellow">
+                  06
+                </span>
+              </div>
+              <div class="p-10">
+                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                  Customization & Fine-Tuning
+                </h4>
+                <p class="font-medium text-gray-500">
+                  Adjust colors, lighting, and composition to match your brand or personal style.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== Why Area End ===== -->
+
+  <!-- scroll Area -->
+  <section class="scroll-area mt-30 relative" style="background: url(assets/img/shape/bg5.png) no-repeat;">
+    <div class="container">
+      <div class="grid lg:gap-9 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+        <!-- Overview Content -->
+        <div
+          class="overview-content max-sm:mb-20 sm:mb-30 max-sm:text-center lg:pr-30 xl:pr-100 order-1 lg:order-1 relative z-2 xl:top-30">
+          <div id="sticky" class="max-lg:!static w-full md:w-[300px] lg:w-[400px] xl:w-[500px]">
+            <div
+              class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+              <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">Why</div>
+            </div>
+            <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
+              Why Virtual Try-On?</h2>
+            <p class="text-[13px] md:text-[15px] lg:text-[16px] leading-7 md:leading-8">
+              Enhance user engagement, boost sales, and redefine shopping experiences.
+            </p>
+            <div class="inline-block text-[13px] md:text-[14px] lg:text-[15px] mt-3 md:mt-15 rounded-full text-red-400 px-5 md:py-2 dc-text-yellow dc-bg-black
+              leading-[1.5em] ease-in duration-300">
+              * The data is sourced from real customer feedback.
+            </div>
+          </div>
+        </div>
+
+        <!-- Overview Image -->
+        <div
+          class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg3 before:w-377 md:before:h-388 lg:before:h-[329px] xl:before:h-388 before:absolute before:right-0 before:top-0 before:-z-1 before:hidden md:before:inline order-1 lg:order-2 md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
+          <div class="mb-20">
+            <div
+              class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
+              <h3 class="px-5 text-2xl font-semibold dc-text-yellow">AI’s Most Popular Feature</h3>
+              <p class="px-5 py-2 text-gray-300">Virtual try-on is a must-have in the AI era.</p>
+              <img src="./assets/img/ai/lydia.webp"
+                class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
+                alt="overview-image">
+            </div>
+          </div>
+          <div class="mb-20">
+            <div
+              class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
+              <h3 class="px-5 text-2xl font-semibold dc-text-yellow">85% Repeat Rate</h3>
+              <p class="px-5 py-2 text-gray-300">Virtual try-on drives unparalleled customer loyalty.</p>
+              <img src="./assets/img/ai/lydia.webp"
+                class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
+                alt="overview-image">
+            </div>
+          </div>
+          <div class="mb-20">
+            <div
+              class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
+              <h3 class="px-5 text-2xl font-semibold dc-text-yellow">Revenue Multiplier</h3>
+              <p class="px-5 py-2 text-gray-300">Virtual try-on can skyrocket your sales potential.</p>
+              <img src="./assets/img/ai/lydia.webp"
+                class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
+                alt="overview-image">
+            </div>
+          </div>
+          <div class="mb-0">
+            <div
+              class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
+              <h3 class="px-5 text-2xl font-semibold dc-text-yellow">Traffic Surge</h3>
+              <p class="px-5 py-2 text-gray-300">Virtual try-on attracts and retains more visitors.</p>
+              <img src="./assets/img/ai/lydia.webp"
+                class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
+                alt="overview-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End scroll Area -->
+
+  <!-- ===== Metrics Section Start ===== -->
+  <section class="Metrics-area mt-30 relative z-1">
+    <div class="container">
+      <!-- Section Title -->
+      <div class="section-title mb-10 md:mb-20 lg:mb-50 text-center wow animate__animated animate__fadeInUp">
+        <div
+          class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+          <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">Metrics</div>
+        </div>
+        <h2 class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[40px] mb-2 text-black">
+          Proven Excellence
+        </h2>
+        <p class="lg:text-[16px] md:text-[15px] text-[13px] lg:max-w-2xl lg:mx-auto leading-7 md:leading-8">
+          Discover the metrics that make us unique.
+        </p>
+      </div>
+
+      <div class="bg-white py-14">
+        <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 text-center lg:grid-cols-4">
+          <div class="mx-auto flex max-w-xs flex-col gap-y-4 dc-bg-black p-10 rounded-4xl w-full">
+            <dt class="text-base/7 text-gray-300 max-sm:h-[4em]">tweaks for perfection. </dt>
+            <dd class="order-first text-3xl font-semibold tracking-tight dc-text-yellow sm:text-5xl">
+              300+</dd>
+          </div>
+          <div class="mx-auto flex max-w-xs flex-col gap-y-4 dc-bg-black p-10 rounded-4xl w-full">
+            <dt class="text-base/7 text-gray-300 max-sm:h-[4em]">Hours of precision engineering.</dt>
+            <dd class="order-first text-3xl font-semibold tracking-tight dc-text-yellow sm:text-5xl">1200</dd>
+          </div>
+          <div class="mx-auto flex max-w-xs flex-col gap-y-4 dc-bg-black p-10 rounded-4xl w-full">
+            <dt class="text-base/7 text-gray-300 max-sm:h-[4em]">Body trained for unmatched accuracy.</dt>
+            <dd class="order-first text-3xl font-semibold tracking-tight dc-text-yellow sm:text-5xl">400K</dd>
+          </div>
+          <div class="mx-auto flex max-w-xs flex-col gap-y-4 dc-bg-black p-10 rounded-4xl w-full">
+            <dt class="text-base/7 text-gray-300 max-sm:h-[4em]">Tasks processed with precision.</dt>
+            <dd class="order-first text-3xl font-semibold tracking-tight dc-text-yellow sm:text-5xl">5M+</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+
+    <!-- <div class="container">
+      <div class="bg-white py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-2xl lg:max-w-none">
+            <div class="text-center">
+              <h2 class="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Trusted by
+                creators
+                worldwide</h2>
+              <p class="mt-4 text-lg/8 text-gray-600">Lorem ipsum dolor sit amet consect adipisicing possimus.</p>
+            </div>
+            <dl
+              class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+              <div class="flex flex-col bg-gray-400/5 p-8">
+                <dt class="text-sm/6 font-semibold text-gray-600">Creators on the platform</dt>
+                <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">8,000+</dd>
+              </div>
+              <div class="flex flex-col bg-gray-400/5 p-8">
+                <dt class="text-sm/6 font-semibold text-gray-600">Flat platform fee</dt>
+                <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">3%</dd>
+              </div>
+              <div class="flex flex-col bg-gray-400/5 p-8">
+                <dt class="text-sm/6 font-semibold text-gray-600">Uptime guarantee</dt>
+                <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">99.9%</dd>
+              </div>
+              <div class="flex flex-col bg-gray-400/5 p-8">
+                <dt class="text-sm/6 font-semibold text-gray-600">Paid out to creators</dt>
+                <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900">$70M</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </section>
+  <!-- ===== Metrics Section End ===== -->
+
+  <!-- ===== FAQ Section Start ===== -->
+  <section class="FAQ-area mt-30 relative z-1">
+    <div class="container">
+      <!-- Section Title -->
+      <div class="section-title mb-10 md:mb-20 lg:mb-50 text-center wow animate__animated animate__fadeInUp">
+        <div
+          class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+          <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">FAQ</div>
+        </div>
+        <h2 class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[40px] mb-2 text-black">
+          Your Questions Answered
+        </h2>
+        <p class="lg:text-[16px] md:text-[15px] text-[13px] lg:max-w-2xl lg:mx-auto leading-7 md:leading-8">
+          Everything you need to know in one place.
+        </p>
+      </div>
+
+      <!-- content -->
+      </h2>
+      <dl class="mt-20 divide-y divide-gray-400/60">
+        <div class="py-8 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8">
+          <dt class="text-base/7 font-semibold lg:col-span-5">What&#039;s the best thing about
+            Switzerland?</dt>
+          <dd class="mt-4 lg:col-span-7 lg:mt-0">
+            <p class="text-base/7">I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor
+              sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</p>
+          </dd>
+        </div>
+        <div class="py-8 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8">
+          <dt class="text-base/7 font-semibold lg:col-span-5">What&#039;s the best thing about
+            Switzerland?</dt>
+          <dd class="mt-4 lg:col-span-7 lg:mt-0">
+            <p class="text-base/7">I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor
+              sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</p>
+          </dd>
+        </div>
+        <div class="py-8 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8">
+          <dt class="text-base/7 font-semibold lg:col-span-5">What&#039;s the best thing about
+            Switzerland?</dt>
+          <dd class="mt-4 lg:col-span-7 lg:mt-0">
+            <p class="text-base/7">I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor
+              sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</p>
+          </dd>
+        </div>
+        <div class="py-8 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8">
+          <dt class="text-base/7 font-semibold lg:col-span-5">What&#039;s the best thing about
+            Switzerland?</dt>
+          <dd class="mt-4 lg:col-span-7 lg:mt-0">
+            <p class="text-base/7">I don&#039;t know, but the flag is a big plus. Lorem ipsum dolor
+              sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</p>
+          </dd>
+        </div>
+        <!-- More questions... -->
+      </dl>
+    </div>
+  </section>
+  <!-- ===== FAQ Section End ===== -->
+
+  <!-- ====== User Section Start -->
+  <section class="User-area mt-30 relative z-1">
+    <div class="container">
+      <!-- Section Title -->
+      <div class="section-title mb-10 md:mb-20 lg:mb-50 text-center wow animate__animated animate__fadeInUp">
+        <div
+          class="inline-block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-4 md:mb-6 p-1 dc-text-black rounded-full border border-[1px] border-[#a3a3a3]">
+          <div class="px-4 py-2 leading-none dc-bg-yellow rounded-full">Users Say</div>
+        </div>
+        <h2 class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[40px] mb-2 text-black">
+          What Our Users Say
+        </h2>
+        <p class="lg:text-[16px] md:text-[15px] text-[13px] lg:max-w-2xl lg:mx-auto leading-7 md:leading-8">
+          Hear from the people who trust our solution.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7.5 text-white">
+        <!-- user column -->
+        <div class="space-y-7.5">
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user1.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Machel Pildium
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user2.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Wilson Bator
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+              <p class="text-gray-300 mt-6">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user3.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Roger George
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+        </div>
+
+        <!-- user column -->
+        <div class="space-y-7.5 hidden sm:block">
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user4.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Adison Dias
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+
+              <p class="text-gray-300 mt-6">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user5.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Abram Lipshutz
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user6.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Jaylon Press
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+        </div>
+
+        <!-- user column -->
+        <div class="space-y-7.5 hidden lg:block">
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user7.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Zain Franci
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user8.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Cristofer Carder
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+
+          <!-- user item -->
+          <div class="relative overflow-hidden px-8 py-9 rounded-[19px] border-0 border-gray-400 dc-bg-black">
+            <div class="relative z-1 overflow-hidden">
+              <div class="flex items-center gap-4.5">
+                <div class="max-w-[48px] w-full rounded-full overflow-hidden">
+                  <img src="./assets/img/user/user9.jpg" alt="user">
+                </div>
+                <div>
+                  <h5 class="text-sm font-medium">
+                    Dulce Rosser
+                  </h5>
+                  <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
+                </div>
+              </div>
+
+              <div class="user-divider relative my-6 w-full h-[1px]"></div>
+
+              <p class="text-gray-300">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's.
+              </p>
+
+              <p class="text-gray-300 mt-6">
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry.
+              </p>
+            </div>
+
+            <div class="absolute -z-0 -top-36 -left-36 w-60 h-60 dc-bg-yellow rounded-full"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ====== User Section End -->
+
+  <!-- CTA Area -->
+  <section class="CTA-area my-30 relative z-1">
+    <div class="container">
+      <div
+        class="relative flex justify-center px-6 py-24 sm:px-6 sm:py-32 lg:px-8 dc-bg-black rounded-[80px] overflow-hidden">
+        <div class="relative z-1 max-w-5xl text-center">
+          <h2
+            class="font-black text-[22px] md:text-[30px] lg:text-[35px] xl:text-[44px] 2xl:text-[58px] mb-4 lg:mb-15 text-white">
+            Ready to Transform Your Platform?
+          </h2>
+          <p class="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-300">
+            Experience the power of virtual try-on with our live demo today.
+          </p>
+          <div class="mt-10 flex items-center justify-center gap-x-6">
+            <a href="/"
+              class="dc-button-black rounded-full leading-none
+              dc-text-black dc-bg-yellow px-10 py-4 text-[13px] md:text-[14px] font-semibold text-white shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+              Try the Demo Now
+              <span
+                class="inline-block ml-2 wow animate__animated animate__wobble animate__slow animate__infinite">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="absolute top-0 left-0 z-0 h-full max-sm:opacity-30">
+          <img alt="shape" loading="lazy" width="560" height="552" decoding="async" data-nimg="1"
+            srcset="https://sassly-react-eight.vercel.app/_next/image?url=%2Fassets%2Fimgs%2Fshape%2Fshape-r-8.png&w=1200&q=75"
+            src="https://sassly-react-eight.vercel.app/_next/image?url=%2Fassets%2Fimgs%2Fshape%2Fshape-r-8.png&w=1200&q=75"
+            style="color: transparent; height: 100%; opacity: 0.2;">
+        </div>
+        <div class="absolute z-0 right-[40px] top-[200px] max-sm:hidden">
+          <img alt="shape" loading="lazy" width="180" height="161" decoding="async" data-nimg="1"
+            srcset="https://sassly-react-eight.vercel.app/_next/image?url=%2Fassets%2Fimgs%2Fshape%2Fshape-r-9.png&w=384&q=75"
+            src="https://sassly-react-eight.vercel.app/_next/image?url=%2Fassets%2Fimgs%2Fshape%2Fshape-r-9.png&w=384&q=75"
+            style="color: transparent; opacity: 0.2;">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End CTA Area -->
+
+  <!-- Footer Area -->
+  <footer class="footer-area py-15 relative z-1 bg-gray-gradient-color2 bg-[#efefef] border-t border-gray-300">
+    <div class="container">
+      <div class="flex flex-col gap-10 items-center justify-center">
+        <a class="text-4xl font-bold" href="/">
+          LOGO
+          <!-- <img class="w-100" src="assets/img/logo.png" alt="logo"> -->
+        </a>
+
+        <ul class="flex gap-15 flex-wrap justify-center">
+          <li>
+            <a href="/"
+              class="inline-block text-[13px] md:text-[14px] lg:text-[16px] transition hover:text-yellow-600 relative before:absolute before:right-0 before:top-7 before:-translate-y-2/4 before:w-full before:h-2 before:bg-yellow-700/50 before:opacity-0 before:invisible hover:before:opacity-100 hover:before:visible">
+              HMOE
+            </a>
+          </li>
+          <li>
+            <a href="/"
+              class="inline-block text-[13px] md:text-[14px] lg:text-[16px] transition hover:text-yellow-600 relative before:absolute before:right-0 before:top-7 before:-translate-y-2/4 before:w-full before:h-2 before:bg-yellow-700/50 before:opacity-0 before:invisible hover:before:opacity-100 hover:before:visible">
+              API
+            </a>
+          </li>
+          <li>
+            <a href="/"
+              class="inline-block text-[13px] md:text-[14px] lg:text-[16px] transition hover:text-yellow-600 relative before:absolute before:right-0 before:top-7 before:-translate-y-2/4 before:w-full before:h-2 before:bg-yellow-700/50 before:opacity-0 before:invisible hover:before:opacity-100 hover:before:visible">
+              DEMO
+            </a>
+          </li>
+          <li>
+            <a href="/"
+              class="inline-block text-[13px] md:text-[14px] lg:text-[16px] transition hover:text-yellow-600 relative before:absolute before:right-0 before:top-7 before:-translate-y-2/4 before:w-full before:h-2 before:bg-yellow-700/50 before:opacity-0 before:invisible hover:before:opacity-100 hover:before:visible">
+              Terms of service
+            </a>
+          </li>
+          <li>
+            <a href="/"
+              class="inline-block text-[13px] md:text-[14px] lg:text-[16px] transition hover:text-yellow-600 relative before:absolute before:right-0 before:top-7 before:-translate-y-2/4 before:w-full before:h-2 before:bg-yellow-700/50 before:opacity-0 before:invisible hover:before:opacity-100 hover:before:visible">
+              Privacy policy
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer Area -->
+
+  <!-- Copyright Area -->
+  <section class="copyright-area py-3 text-center bg-black/10">
+    <div class="container">
+      <div class="">
+        <div class="copyright">
+          <p class="text-[13px] md:text-[15px] lg:text-[16px]">
+            © 2024 Your Company, Inc. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Copyright Area -->
+
+  <!-- Back To Top Start -->
+  <button
+    class="top-button hidden items-center justify-center w-10 h-10 rounded-full shadow-solid-5 dc-bg-black hover:opacity-70 fixed bottom-8 right-8 z-999 border border-blue-400"
+    @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+    @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ '!flex' : scrollTop }">
+    <!-- <svg class="fill-[#d4f73f] w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
+      <path
+        d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+      </path>
+    </svg> -->
+    <svg class="h-6 w-6 text-center m-auto absolute left-0 right-0 top-1/2 -translate-y-2/4 fill-[#d4f73f]"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#d4f73f">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7l4-4m0 0l4 4m-4-4v18" />
+    </svg>
+  </button>
+  <!-- Back To Top End -->
+
+  <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
+  <div id="sign-dialog" class="zoom-anim-dialog mfp-hide rounded-xl overflow-hidden"
+    x-data="{signTab: 0, signInTab: 'password'}">
+    <!-- Sign In -->
+    <div x-show="signTab === 0">
+      <h1 class="py-6 font-bold text-2xl text-center dc-bg-black dc-bg-yellow">Sign In</h1>
+      <form class="py-10 px-5 md:px-15">
+        <!-- Google Login -->
+        <div id="custom-google-login-btn" @click="googleLoginBtn"
+          class="w-full flex items-center justify-center gap-3 p-3.5 font-medium text-black rounded-full border border-black/[0.12] ease-in duration-300 hover:border-black cursor-pointer">
+          <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_132_14584)">
+              <path
+                d="M22.5001 11.2438C22.5134 10.4876 22.4338 9.73256 22.2629 8.995H11.7246V13.0771H17.9105C17.7933 13.7929 17.5296 14.478 17.1352 15.0914C16.7409 15.7047 16.224 16.2335 15.6158 16.646L15.5942 16.7827L18.9264 19.3124L19.1571 19.335C21.2772 17.4161 22.4997 14.5926 22.4997 11.2438"
+                fill="#4285F4" />
+              <path
+                d="M11.7245 22C14.755 22 17.2992 21.0221 19.1577 19.3355L15.6156 16.6464C14.6679 17.2944 13.3958 17.7467 11.7245 17.7467C10.3051 17.7385 8.92433 17.2926 7.77814 16.472C6.63195 15.6515 5.77851 14.4981 5.33892 13.1755L5.20737 13.1865L1.74255 15.8142L1.69727 15.9376C2.63043 17.7602 4.06252 19.2925 5.83341 20.3631C7.60429 21.4337 9.64416 22.0005 11.7249 22"
+                fill="#34A853" />
+              <path
+                d="M5.33889 13.1755C5.09338 12.4753 4.96669 11.7404 4.96388 11C4.9684 10.2608 5.09041 9.52685 5.32552 8.8245L5.31927 8.67868L1.81196 6.00867L1.69724 6.06214C0.910039 7.5938 0.5 9.28491 0.5 10.9999C0.5 12.7148 0.910039 14.406 1.69724 15.9376L5.33889 13.1755Z"
+                fill="#FBBC05" />
+              <path
+                d="M11.7249 4.25337C13.3333 4.22889 14.8888 4.8159 16.065 5.89121L19.2329 2.86003C17.2011 0.992106 14.5106 -0.0328008 11.7249 3.27798e-05C9.64418 -0.000452376 7.60433 0.566279 5.83345 1.63686C4.06256 2.70743 2.63046 4.23965 1.69727 6.06218L5.32684 8.82455C5.77077 7.50213 6.62703 6.34962 7.77491 5.5295C8.9228 4.70938 10.3044 4.26302 11.7249 4.25337Z"
+                fill="#EB4335" />
+            </g>
+            <defs>
+              <clipPath id="clip0_132_14584">
+                <rect width="22" height="22" fill="black" transform="translate(0.5)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Sign in with Google
+        </div>
+
+        <!-- Apple Login -->
+        <div
+          class="mt-4 w-full flex items-center justify-center gap-3 p-3.5 font-medium text-black rounded-full border border-black/[0.12] ease-in duration-300 hover:border-black cursor-pointer">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.1223 7.66195C18.9986 7.75638 16.816 8.9673 16.816 11.6599C16.816 14.7743 19.5933 15.8761 19.6764 15.9034C19.6636 15.9706 19.2352 17.4124 18.2121 18.8814C17.2999 20.1742 16.3471 21.4649 14.8977 21.4649C13.4483 21.4649 13.0753 20.6359 11.4021 20.6359C9.77152 20.6359 9.19179 21.4922 7.86601 21.4922C6.54024 21.4922 5.61517 20.2959 4.55157 18.8269C3.31961 17.1018 2.32422 14.4218 2.32422 11.8782C2.32422 7.79838 5.01839 5.63461 7.6699 5.63461C9.0788 5.63461 10.2533 6.54545 11.1378 6.54545C11.9797 6.54545 13.2927 5.58006 14.8956 5.58006C15.503 5.58006 17.6856 5.63461 19.1223 7.66195ZM14.1346 3.85285C14.7975 3.07844 15.2664 2.00392 15.2664 0.929401C15.2664 0.780396 15.2536 0.629294 15.2259 0.507568C14.1474 0.547443 12.8643 1.21482 12.0906 2.09836C11.4831 2.77833 10.9161 3.85285 10.9161 4.94206C10.9161 5.10579 10.9438 5.26945 10.9566 5.3219C11.0248 5.33452 11.1357 5.3492 11.2465 5.3492C12.2142 5.3492 13.4313 4.7112 14.1346 3.85285Z"
+              fill="black" />
+          </svg>
+          Sign in with Apple
+        </div>
+
+        <!-- Divider -->
+        <span class="relative block font-medium text-sm text-center my-7.5">
+          <span class="block absolute left-0 top-1/2 h-[1px] w-22.5 bg-black/[0.12]"></span>
+          <span class="block absolute right-0 top-1/2 h-[1px] w-22.5 bg-black/[0.12]"></span>
+
+          Or sign in with email
+        </span>
+
+        <!-- signInTab -->
+        <div id="Tab_Title" class="flex items-center justify-center gap-5 px-4 pb-8">
+          <button @click.prevent="signInTab = 'password'" id="Tab_Title_1"
+            :class="{'text-black border-b border-gary-500': signInTab === 'password'}">
+            Password
+          </button>
+          <button @click.prevent="signInTab = 'captcha'" id="Tab_Title_2"
+            :class="{'text-black border-b border-gary-500': signInTab === 'captcha'}">
+            Captcha
+          </button>
+        </div>
+
+        <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
+          <!-- 错误信息将显示在这里 -->
+        </div>
+
+        <!-- Tab Content -->
+        <div class="Tab-Content">
+          <!-- Email Tab -->
+          <div x-show="signInTab === 'password'">
+            <div class="mb-4 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                    fill="#918EA0" />
+                </svg>
+              </span>
+              <input type="email" placeholder="Enter your email" id="tab_1_email" value="aaa@aaa.com"
+                class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div class="mb-5 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_368_6544)">
+                    <path
+                      d="M14.0752 1.92501C13.1252 0.975012 11.8502 0.450012 10.5002 0.450012C9.1502 0.450012 7.8502 0.975012 6.9002 1.92501C5.6252 3.20001 5.1252 5.00001 5.5752 6.75001L0.725195 11.575C0.550195 11.75 0.450195 12 0.450195 12.275V14.6C0.450195 15.125 0.875195 15.575 1.4252 15.575H3.7502C4.0002 15.575 4.2502 15.475 4.4502 15.3L5.0252 14.725C5.2252 14.525 5.3502 14.225 5.3002 13.925V13.875L5.6002 13.85C6.0752 13.8 6.4252 13.45 6.4752 12.975L6.5002 12.675H6.5502C6.8252 12.7 7.1002 12.625 7.3252 12.425C7.5252 12.25 7.6502 11.975 7.6502 11.7V11.5H7.8252C8.0752 11.5 8.3252 11.4 8.5002 11.225L9.3252 10.425C11.0502 10.85 12.8502 10.375 14.1002 9.12501C16.0502 7.12501 16.0502 3.90001 14.0752 1.92501ZM13.2752 8.30001C12.2502 9.32501 10.7252 9.70001 9.3002 9.22501C9.1002 9.15001 8.8752 9.20001 8.7252 9.35001L7.7252 10.35H7.0502C6.7502 10.35 6.4752 10.6 6.4752 10.925V11.525L6.0252 11.475C5.8752 11.45 5.7252 11.5 5.6002 11.6C5.4752 11.7 5.4002 11.825 5.4002 11.975L5.3252 12.725L4.5752 12.8C4.4252 12.825 4.2752 12.9 4.2002 13C4.1002 13.125 4.0502 13.275 4.0752 13.425L4.1502 13.975L3.6752 14.45H1.5752V12.35L6.6002 7.32501C6.7502 7.17501 6.8002 6.95001 6.7252 6.75001C6.2752 5.32501 6.6252 3.80001 7.6752 2.75001C8.4252 2.00001 9.4002 1.60001 10.4752 1.60001C11.5252 1.60001 12.5252 2.00001 13.2752 2.75001C14.8252 4.25001 14.8252 6.75001 13.2752 8.30001Z"
+                      fill="#918EA0" />
+                    <path
+                      d="M11.3498 2.875C10.8748 2.875 10.4248 3.05 10.0748 3.4C9.3748 4.1 9.3748 5.225 10.0748 5.925C10.4248 6.275 10.8748 6.45 11.3498 6.45C11.8248 6.45 12.2748 6.275 12.6248 5.925C12.9748 5.575 13.1498 5.125 13.1498 4.65C13.1498 4.175 12.9748 3.725 12.6248 3.375C12.2748 3.05 11.8248 2.875 11.3498 2.875ZM11.8248 5.125C11.5748 5.375 11.1248 5.375 10.8748 5.125C10.6248 4.875 10.6248 4.45 10.8748 4.175C10.9998 4.05 11.1748 3.975 11.3498 3.975C11.5248 3.975 11.6998 4.05 11.8248 4.175C11.9498 4.3 12.0248 4.475 12.0248 4.65C12.0248 4.825 11.9498 5 11.8248 5.125Z"
+                      fill="#918EA0" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_368_6544">
+                      <rect width="16" height="16" fill="black" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </span>
+              <input type="password" placeholder="Password" id="tab_1_password" value="123123"
+                class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div id="tab_1_signInBtn" @click="tab_1_signInBtn"
+              class="dc-text-yellow dc-bg-black flex justify-center w-full rounded-full my-10 py-3 px-7 text-black font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+              Sign in
+            </div>
+          </div>
+
+          <!-- Captcha signInTab -->
+          <div x-show="signInTab === 'captcha'">
+            <div class="mb-4 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                    fill="#918EA0" />
+                </svg>
+              </span>
+              <input type="email" placeholder="Enter your email" id="tab_2_email" value="aaa@aaa.com"
+                class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div class="mb-5 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+              </span>
+              <input type="captcha" placeholder="Captcha" id="tab_2_captcha"
+                class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+              <div @click="sendButton"
+                class="send dc-button-black2 !absolute top-1 right-1 bottom-1 flex items-center px-5 dc-text-black dc-bg-yellow hover:bg-blue-500 rounded-full cursor-pointer select-none">
+                Send
+              </div>
+            </div>
+
+            <div id="tab_2_signInBtn" @click="tab_2_signInBtn()"
+              class="dc-text-yellow dc-bg-black flex justify-center w-full rounded-full my-10 py-3 px-7 text-black font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+              Sign in
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p class="text-center font-medium text-gray-600 mt-5">
+            Don't have an account?
+            <a class="border-b border-gary-500 cursor-pointer" @click="signTab = 1">Sign Up</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sign Up -->
+    <div x-show="signTab === 1">
+      <h1 class="py-6 font-bold text-2xl text-center dc-bg-black dc-bg-yellow">Sign Up</h1>
+      <form class="py-10 px-5 md:px-15">
+        <!-- Google Login -->
+        <div id="custom-google-login-btn" @click="googleLoginBtn"
+          class="w-full flex items-center justify-center gap-3 p-3.5 font-medium text-black rounded-full border border-black/[0.12] ease-in duration-300 hover:border-black cursor-pointer">
+          <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_132_14584)">
+              <path
+                d="M22.5001 11.2438C22.5134 10.4876 22.4338 9.73256 22.2629 8.995H11.7246V13.0771H17.9105C17.7933 13.7929 17.5296 14.478 17.1352 15.0914C16.7409 15.7047 16.224 16.2335 15.6158 16.646L15.5942 16.7827L18.9264 19.3124L19.1571 19.335C21.2772 17.4161 22.4997 14.5926 22.4997 11.2438"
+                fill="#4285F4" />
+              <path
+                d="M11.7245 22C14.755 22 17.2992 21.0221 19.1577 19.3355L15.6156 16.6464C14.6679 17.2944 13.3958 17.7467 11.7245 17.7467C10.3051 17.7385 8.92433 17.2926 7.77814 16.472C6.63195 15.6515 5.77851 14.4981 5.33892 13.1755L5.20737 13.1865L1.74255 15.8142L1.69727 15.9376C2.63043 17.7602 4.06252 19.2925 5.83341 20.3631C7.60429 21.4337 9.64416 22.0005 11.7249 22"
+                fill="#34A853" />
+              <path
+                d="M5.33889 13.1755C5.09338 12.4753 4.96669 11.7404 4.96388 11C4.9684 10.2608 5.09041 9.52685 5.32552 8.8245L5.31927 8.67868L1.81196 6.00867L1.69724 6.06214C0.910039 7.5938 0.5 9.28491 0.5 10.9999C0.5 12.7148 0.910039 14.406 1.69724 15.9376L5.33889 13.1755Z"
+                fill="#FBBC05" />
+              <path
+                d="M11.7249 4.25337C13.3333 4.22889 14.8888 4.8159 16.065 5.89121L19.2329 2.86003C17.2011 0.992106 14.5106 -0.0328008 11.7249 3.27798e-05C9.64418 -0.000452376 7.60433 0.566279 5.83345 1.63686C4.06256 2.70743 2.63046 4.23965 1.69727 6.06218L5.32684 8.82455C5.77077 7.50213 6.62703 6.34962 7.77491 5.5295C8.9228 4.70938 10.3044 4.26302 11.7249 4.25337Z"
+                fill="#EB4335" />
+            </g>
+            <defs>
+              <clipPath id="clip0_132_14584">
+                <rect width="22" height="22" fill="black" transform="translate(0.5)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Sign in with Google
+        </div>
+
+        <!-- Apple Login -->
+        <div
+          class="mt-4 w-full flex items-center justify-center gap-3 p-3.5 font-medium text-black rounded-full border border-black/[0.12] ease-in duration-300 hover:border-black cursor-pointer">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.1223 7.66195C18.9986 7.75638 16.816 8.9673 16.816 11.6599C16.816 14.7743 19.5933 15.8761 19.6764 15.9034C19.6636 15.9706 19.2352 17.4124 18.2121 18.8814C17.2999 20.1742 16.3471 21.4649 14.8977 21.4649C13.4483 21.4649 13.0753 20.6359 11.4021 20.6359C9.77152 20.6359 9.19179 21.4922 7.86601 21.4922C6.54024 21.4922 5.61517 20.2959 4.55157 18.8269C3.31961 17.1018 2.32422 14.4218 2.32422 11.8782C2.32422 7.79838 5.01839 5.63461 7.6699 5.63461C9.0788 5.63461 10.2533 6.54545 11.1378 6.54545C11.9797 6.54545 13.2927 5.58006 14.8956 5.58006C15.503 5.58006 17.6856 5.63461 19.1223 7.66195ZM14.1346 3.85285C14.7975 3.07844 15.2664 2.00392 15.2664 0.929401C15.2664 0.780396 15.2536 0.629294 15.2259 0.507568C14.1474 0.547443 12.8643 1.21482 12.0906 2.09836C11.4831 2.77833 10.9161 3.85285 10.9161 4.94206C10.9161 5.10579 10.9438 5.26945 10.9566 5.3219C11.0248 5.33452 11.1357 5.3492 11.2465 5.3492C12.2142 5.3492 13.4313 4.7112 14.1346 3.85285Z"
+              fill="black" />
+          </svg>
+          Sign in with Apple
+        </div>
+
+        <!-- Divider -->
+        <span class="relative block font-medium text-sm text-center my-7.5">
+          <span class="block absolute left-0 top-1/2 h-[1px] w-22.5 bg-black/[0.12]"></span>
+          <span class="block absolute right-0 top-1/2 h-[1px] w-22.5 bg-black/[0.12]"></span>
+
+          Or sign in with email
+        </span>
+
+        <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
+          <!-- 错误信息将显示在这里 -->
+        </div>
+
+        <!-- 邮箱 -->
+        <div class="mb-4 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                fill="#918EA0" />
+            </svg>
+          </span>
+          <input id="tab_2_email" type="email" placeholder="Enter your email" value="aaa@aaa.com"
+            class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+        </div>
+
+        <!-- 密码 -->
+        <div class="mb-5 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_368_6544)">
+                <path
+                  d="M14.0752 1.92501C13.1252 0.975012 11.8502 0.450012 10.5002 0.450012C9.1502 0.450012 7.8502 0.975012 6.9002 1.92501C5.6252 3.20001 5.1252 5.00001 5.5752 6.75001L0.725195 11.575C0.550195 11.75 0.450195 12 0.450195 12.275V14.6C0.450195 15.125 0.875195 15.575 1.4252 15.575H3.7502C4.0002 15.575 4.2502 15.475 4.4502 15.3L5.0252 14.725C5.2252 14.525 5.3502 14.225 5.3002 13.925V13.875L5.6002 13.85C6.0752 13.8 6.4252 13.45 6.4752 12.975L6.5002 12.675H6.5502C6.8252 12.7 7.1002 12.625 7.3252 12.425C7.5252 12.25 7.6502 11.975 7.6502 11.7V11.5H7.8252C8.0752 11.5 8.3252 11.4 8.5002 11.225L9.3252 10.425C11.0502 10.85 12.8502 10.375 14.1002 9.12501C16.0502 7.12501 16.0502 3.90001 14.0752 1.92501ZM13.2752 8.30001C12.2502 9.32501 10.7252 9.70001 9.3002 9.22501C9.1002 9.15001 8.8752 9.20001 8.7252 9.35001L7.7252 10.35H7.0502C6.7502 10.35 6.4752 10.6 6.4752 10.925V11.525L6.0252 11.475C5.8752 11.45 5.7252 11.5 5.6002 11.6C5.4752 11.7 5.4002 11.825 5.4002 11.975L5.3252 12.725L4.5752 12.8C4.4252 12.825 4.2752 12.9 4.2002 13C4.1002 13.125 4.0502 13.275 4.0752 13.425L4.1502 13.975L3.6752 14.45H1.5752V12.35L6.6002 7.32501C6.7502 7.17501 6.8002 6.95001 6.7252 6.75001C6.2752 5.32501 6.6252 3.80001 7.6752 2.75001C8.4252 2.00001 9.4002 1.60001 10.4752 1.60001C11.5252 1.60001 12.5252 2.00001 13.2752 2.75001C14.8252 4.25001 14.8252 6.75001 13.2752 8.30001Z"
+                  fill="#918EA0" />
+                <path
+                  d="M11.3498 2.875C10.8748 2.875 10.4248 3.05 10.0748 3.4C9.3748 4.1 9.3748 5.225 10.0748 5.925C10.4248 6.275 10.8748 6.45 11.3498 6.45C11.8248 6.45 12.2748 6.275 12.6248 5.925C12.9748 5.575 13.1498 5.125 13.1498 4.65C13.1498 4.175 12.9748 3.725 12.6248 3.375C12.2748 3.05 11.8248 2.875 11.3498 2.875ZM11.8248 5.125C11.5748 5.375 11.1248 5.375 10.8748 5.125C10.6248 4.875 10.6248 4.45 10.8748 4.175C10.9998 4.05 11.1748 3.975 11.3498 3.975C11.5248 3.975 11.6998 4.05 11.8248 4.175C11.9498 4.3 12.0248 4.475 12.0248 4.65C12.0248 4.825 11.9498 5 11.8248 5.125Z"
+                  fill="#918EA0" />
+              </g>
+              <defs>
+                <clipPath id="clip0_368_6544">
+                  <rect width="16" height="16" fill="black" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <input id="password" type="password" placeholder="Confirm password" value="123123"
+            class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+        </div>
+
+        <!-- 验证码 -->
+        <div class="mb-5 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+          </span>
+          <input type="captcha" placeholder="Captcha" id="signUp_captcha"
+            class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+          <div @click="sendButton"
+            class="send dc-button-black2 !absolute top-1 right-1 bottom-1 flex items-center px-5 dc-text-black dc-bg-yellow hover:bg-blue-500 rounded-full cursor-pointer select-none">
+            Send
+          </div>
+        </div>
+
+        <div id="tab_2_signInBtn" @click="tab_2_signInBtn()"
+          class="dc-text-yellow dc-bg-black flex justify-center w-full rounded-full my-10 py-3 px-7 text-black font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+          Sign Up
+        </div>
+
+        <p class="text-center font-medium text-gray-600 mt-5">
+          Already have an account?
+          <a class="border-b border-gary-500 cursor-pointer" @click="signTab = 0">Sign In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- All JS Links -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/magnific-popup.min.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
+
+<script>
+</script>
