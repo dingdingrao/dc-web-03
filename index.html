@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -10,20 +10,24 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.svg">
 
   <!-- All CSS Links -->
-  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-  <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/animate.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/dialog.css">
+  <link rel="stylesheet" href="./assets/css/tailwind.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="assets/css/swiper-bundle.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="assets/css/magnific-popup.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="assets/css/animate.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="assets/css/style.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="assets/css/dialog.min.css">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  <link rel="stylesheet" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
   <!-- Tailwind -->
-  <script src=" https://unpkg.com/@tailwindcss/browser@4"></script>
+  <!-- <script src=" https://unpkg.com/@tailwindcss/browser@4"></script> -->
 </head>
 
 <body x-data="{scrollTop : false}">
@@ -45,7 +49,7 @@
     @scroll.window="stickyMenu = (window.scrollY > 0) ? true : false"
     class="navbar-area fixed z-100 top-0 w-full shadow-navbar z-2 backdrop-blur-md bg-[#ffffff61]"
     :class="{ 'is-sticky text-white dc-bg-black': stickyMenu }">
-    <!-- H5 -->
+    <!-- b -->
     <div class="dc-responsive-nav lg:hidden">
       <div class="container">
         <nav class="navbar w-full h-[60px] flex justify-between items-center">
@@ -155,7 +159,8 @@
   <!-- End Navbar Area -->
 
   <!-- Banner Area -->
-  <section class="banner-area pt-20 md:pt-30 relative z-1" style="background: url(assets/img/shape/bg9.png) no-repeat;">
+  <section class="banner-area pt-20 md:pt-30 relative z-1"
+    style="background: url(assets/img/shape/bg9.webp) no-repeat;">
     <div class="container">
       <div class="banner-content text-center ml-auto mr-auto max-w-[1010px]">
         <div
@@ -192,7 +197,7 @@
       </div>
     </div>
 
-    <!-- 特效 -->
+    <!-- special effect -->
     <div class="absolute -z-1 left-0 top-[34%]">
       <img src="assets/img/shape/shape16.png" alt="shape" class="animate-custom-movebounce">
     </div>
@@ -575,9 +580,9 @@
                 </span>
               </div>
               <div class="p-10">
-                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                <h3 class="font-semibold text-2xl dc-text-black mb-4">
                   AI Image Generation
-                </h4>
+                </h3>
                 <p class="font-medium text-gray-500">
                   Effortlessly generate high-quality images with AI to enhance your
                   designs and creative projects.
@@ -599,9 +604,9 @@
                 </span>
               </div>
               <div class="p-10">
-                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                <h3 class="font-semibold text-2xl dc-text-black mb-4">
                   High-Resolution Output
-                </h4>
+                </h3>
                 <p class="font-medium text-gray-500">
                   Produce clear and detailed images that capture every nuance.
                 </p>
@@ -622,9 +627,9 @@
                 </span>
               </div>
               <div class="p-10">
-                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                <h3 class="font-semibold text-2xl dc-text-black mb-4">
                   Diverse Styles
-                </h4>
+                </h3>
                 <p class="font-medium text-gray-500">
                   From realistic to artistic, explore various styles to match your vision.
                 </p>
@@ -645,9 +650,9 @@
                 </span>
               </div>
               <div class="p-10">
-                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                <h3 class="font-semibold text-2xl dc-text-black mb-4">
                   Smart Image Enhancement
-                </h4>
+                </h3>
                 <p class="font-medium text-gray-500">
                   Refine quality, adjust details, and achieve a professional look effortlessly.
                 </p>
@@ -668,9 +673,9 @@
                 </span>
               </div>
               <div class="p-10">
-                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                <h3 class="font-semibold text-2xl dc-text-black mb-4">
                   Text-to-Image Transformation
-                </h4>
+                </h3>
                 <p class="font-medium text-gray-500">
                   Turn your ideas into stunning visuals with AI-powered text-to-image generation.
                 </p>
@@ -691,9 +696,9 @@
                 </span>
               </div>
               <div class="p-10">
-                <h4 class="font-semibold text-2xl dc-text-black mb-4">
+                <h3 class="font-semibold text-2xl dc-text-black mb-4">
                   Customization & Fine-Tuning
-                </h4>
+                </h3>
                 <p class="font-medium text-gray-500">
                   Adjust colors, lighting, and composition to match your brand or personal style.
                 </p>
@@ -939,12 +944,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user1.jpg" alt="user">
+                  <img src="./assets/img/user/user1.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Machel Pildium
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -963,12 +968,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user2.jpg" alt="user">
+                  <img src="./assets/img/user/user2.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Wilson Bator
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -992,12 +997,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user3.jpg" alt="user">
+                  <img src="./assets/img/user/user3.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Roger George
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -1021,12 +1026,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user4.jpg" alt="user">
+                  <img src="./assets/img/user/user4.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Adison Dias
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -1052,12 +1057,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user5.jpg" alt="user">
+                  <img src="./assets/img/user/user5.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Abram Lipshutz
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -1078,12 +1083,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user6.jpg" alt="user">
+                  <img src="./assets/img/user/user6.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Jaylon Press
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -1107,12 +1112,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user7.jpg" alt="user">
+                  <img src="./assets/img/user/user7.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Zain Franci
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -1133,12 +1138,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user8.jpg" alt="user">
+                  <img src="./assets/img/user/user8.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Cristofer Carder
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -1159,12 +1164,12 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user9.jpg" alt="user">
+                  <img src="./assets/img/user/user9.webp" alt="user">
                 </div>
                 <div>
-                  <h5 class="text-sm font-medium">
+                  <b class="text-sm font-medium">
                     Dulce Rosser
-                  </h5>
+                  </b>
                   <p class="mt-1 font-medium text-xs text-gray-400">CEO</p>
                 </div>
               </div>
@@ -1374,7 +1379,7 @@
         </div>
 
         <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
-          <!-- 错误信息将显示在这里 -->
+          <!-- Error messages will be displayed here -->
         </div>
 
         <!-- Tab Content -->
@@ -1514,10 +1519,10 @@
         </span>
 
         <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
-          <!-- 错误信息将显示在这里 -->
+          <!-- Error messages will be displayed here -->
         </div>
 
-        <!-- 邮箱 -->
+        <!-- mailbox -->
         <div class="mb-4 relative">
           <span class="absolute top-1/2 -translate-y-1/2 left-6">
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1530,7 +1535,7 @@
             class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
         </div>
 
-        <!-- 密码 -->
+        <!-- password -->
         <div class="mb-5 relative">
           <span class="absolute top-1/2 -translate-y-1/2 left-6">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1553,7 +1558,7 @@
             class="w-full border border-black/[0.12] bg-transparent rounded-full focus:border-black pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
         </div>
 
-        <!-- 验证码 -->
+        <!-- Captcha -->
         <div class="mb-5 relative">
           <span class="absolute top-1/2 -translate-y-1/2 left-6">
             <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
@@ -1581,10 +1586,10 @@
 
   <!-- All JS Links -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/magnific-popup.min.js"></script>
-  <script src="assets/js/wow.min.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script defer src="assets/js/jquery.min.js"></script>
+  <script defer src="assets/js/magnific-popup.min.js"></script>
+  <script defer src="assets/js/wow.min.js"></script>
+  <script defer src="assets/js/main.min.js"></script>
 </body>
 
 </html>
