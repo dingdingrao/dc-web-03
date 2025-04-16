@@ -55,7 +55,7 @@
         <nav class="navbar w-full h-[60px] flex justify-between items-center">
           <div class="flex gap-3">
             <!-- Hamburger Toggle BTN -->
-            <button class="lg:hidden block shrink-0" @click="navigationOpen = !navigationOpen">
+            <button aria-label="Hamburger" class="lg:hidden block shrink-0" @click="navigationOpen = !navigationOpen">
               <span class="block relative cursor-pointer w-5.5 h-5.5">
                 <span class="du-block absolute right-0 w-full h-full">
                   <span
@@ -199,10 +199,10 @@
 
     <!-- special effect -->
     <div class="absolute -z-1 left-0 top-[34%]">
-      <img src="assets/img/shape/shape16.png" alt="shape" class="animate-custom-movebounce">
+      <img src="assets/img/shape/shape16.png" alt="shape" class="animate-custom-movebounce" width="166" height="259">
     </div>
     <div class="absolute -z-1 right-[0] top-[14%]">
-      <img src="assets/img/shape/shape18.png" alt="shape" class="animate-custom-movebounce">
+      <img src="assets/img/shape/shape18.png" alt="shape" class="animate-custom-movebounce" width="118" height="194">
     </div>
   </section>
   <!-- End Banner Area -->
@@ -293,8 +293,8 @@
         class="grid gap-10 md:gap-10 lg:gap-30 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
         <div
           class="overview-image md:pt-30 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg before:w-377 md:before:h-388 lg:before:h-[330px] xl:before:h-388 before:absolute before:left-0 before:top-0 before:hidden before:-z-1 md:before:inline md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
-          <img src="./assets/img/ai/france-boy.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
-            data-wow-delay=".1s" alt="overview-image">
+          <img src="./assets/img/ai/france-boy.webp" loading="lazy"
+            class="rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s" alt="overview-image">
         </div>
         <div class="overview-content self-center xl:pl-100 lg:pl-30 relative xl:top-30 max-sm:text-center">
           <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
@@ -329,8 +329,8 @@
         </div>
         <div
           class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg3 before:w-377 md:before:h-388 lg:before:h-[329px] xl:before:h-388 before:absolute before:right-0 before:top-0 before:-z-1 before:hidden md:before:inline order-1 lg:order-2 md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
-          <img src="./assets/img/ai/luxembourg-boy.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
-            data-wow-delay=".1s" alt="overview-image">
+          <img src="./assets/img/ai/luxembourg-boy.webp" loading="lazy"
+            class="rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s" alt="overview-image">
         </div>
       </div>
     </div>
@@ -343,8 +343,8 @@
       <div class="grid gap-10 md:gap-30  grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
         <div
           class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg4 before:w-377 md:before:h-388 lg:before:h-[330px] xl:before:h-388 before:absolute before:left-0 before:top-0 before:hidden before:-z-1 md:before:inline md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
-          <img src="./assets/img/ai/monaco-girl.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
-            data-wow-delay=".1s" alt="overview-image">
+          <img src="./assets/img/ai/monaco-girl.webp" loading="lazy"
+            class="rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s" alt="overview-image">
         </div>
         <div class="overview-content self-center xl:pl-100 lg:pl-30 relative xl:top-30 max-sm:text-center">
           <!-- <span class="block text-purple-700 font-semibold text-[13px] md:text-[14px] mb-3 md:mb-5">Our
@@ -380,8 +380,8 @@
         </div>
         <div
           class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg3 before:w-377 md:before:h-388 lg:before:h-[329px] xl:before:h-388 before:absolute before:right-0 before:top-0 before:-z-1 before:hidden md:before:inline order-1 lg:order-2 md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
-          <img src="./assets/img/ai/netherlands-girl.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
-            data-wow-delay=".1s" alt="overview-image">
+          <img src="./assets/img/ai/netherlands-girl.webp" loading="lazy"
+            class="rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s" alt="overview-image">
         </div>
       </div>
     </div>
@@ -394,8 +394,8 @@
       <div class="grid gap-10 md:gap-30  grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
         <div
           class="overview-image md:pt-0 lg:pt-30 xl:pt-60 relative z-1 circle-shape-bg4 before:w-377 md:before:h-388 lg:before:h-[330px] xl:before:h-388 before:absolute before:left-0 before:top-0 before:hidden before:-z-1 md:before:inline md:before:animate-none 2xl:before:animate-custom-slow-rotateme">
-          <img src="./assets/img/ai/netherlands-boy.webp" class="rounded-3xl wow animate__animated animate__fadeInUp"
-            data-wow-delay=".1s" alt="overview-image">
+          <img src="./assets/img/ai/netherlands-boy.webp" loading="lazy"
+            class="rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s" alt="overview-image">
         </div>
         <div class="overview-content self-center xl:pl-100 lg:pl-30 relative xl:top-30 max-sm:text-center">
           <h2 class="font-black text-[22px] md:text-[28px] lg:text-[35px] xl:text-[40px] mb-4 lg:mb-15 text-black">
@@ -743,7 +743,7 @@
               class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
               <h3 class="px-5 text-2xl font-semibold dc-text-yellow">AI’s Most Popular Feature</h3>
               <p class="px-5 py-2 text-gray-300">Virtual try-on is a must-have in the AI era.</p>
-              <img src="./assets/img/ai/lydia.webp"
+              <img src="./assets/img/ai/lydia.webp" loading="lazy"
                 class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
                 alt="overview-image">
             </div>
@@ -753,7 +753,7 @@
               class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
               <h3 class="px-5 text-2xl font-semibold dc-text-yellow">85% Repeat Rate</h3>
               <p class="px-5 py-2 text-gray-300">Virtual try-on drives unparalleled customer loyalty.</p>
-              <img src="./assets/img/ai/lydia.webp"
+              <img src="./assets/img/ai/lydia.webp" loading="lazy"
                 class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
                 alt="overview-image">
             </div>
@@ -763,7 +763,7 @@
               class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
               <h3 class="px-5 text-2xl font-semibold dc-text-yellow">Revenue Multiplier</h3>
               <p class="px-5 py-2 text-gray-300">Virtual try-on can skyrocket your sales potential.</p>
-              <img src="./assets/img/ai/lydia.webp"
+              <img src="./assets/img/ai/lydia.webp" loading="lazy"
                 class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
                 alt="overview-image">
             </div>
@@ -773,7 +773,7 @@
               class="relative before:bg-[#262628] before:flex before:items-center before:py-15 before:rounded-3xl before:w-[98%] before:h-[95%] before:absolute before:-left-10 before:-top-5 before:-z-1">
               <h3 class="px-5 text-2xl font-semibold dc-text-yellow">Traffic Surge</h3>
               <p class="px-5 py-2 text-gray-300">Virtual try-on attracts and retains more visitors.</p>
-              <img src="./assets/img/ai/lydia.webp"
+              <img src="./assets/img/ai/lydia.webp" loading="lazy"
                 class="aspect-4/3 object-cover rounded-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
                 alt="overview-image">
             </div>
@@ -944,7 +944,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user1.webp" alt="user">
+                  <img src="./assets/img/user/user1.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -968,7 +968,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user2.webp" alt="user">
+                  <img src="./assets/img/user/user2.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -997,7 +997,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user3.webp" alt="user">
+                  <img src="./assets/img/user/user3.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -1026,7 +1026,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user4.webp" alt="user">
+                  <img src="./assets/img/user/user4.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -1057,7 +1057,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user5.webp" alt="user">
+                  <img src="./assets/img/user/user5.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -1083,7 +1083,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user6.webp" alt="user">
+                  <img src="./assets/img/user/user6.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -1112,7 +1112,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user7.webp" alt="user">
+                  <img src="./assets/img/user/user7.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -1138,7 +1138,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user8.webp" alt="user">
+                  <img src="./assets/img/user/user8.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
@@ -1164,7 +1164,7 @@
             <div class="relative z-1 overflow-hidden">
               <div class="flex items-center gap-4.5">
                 <div class="max-w-[48px] w-full rounded-full overflow-hidden">
-                  <img src="./assets/img/user/user9.webp" alt="user">
+                  <img src="./assets/img/user/user9.webp" alt="user" loading="lazy" width="48" height="48">
                 </div>
                 <div>
                   <b class="text-sm font-medium">
